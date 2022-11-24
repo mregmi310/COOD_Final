@@ -10,7 +10,6 @@ public class ManagerDAO {
 		String insertQuery = "Insert into Manager values('"+lastName+"','"+firstName+"','"+username+"','"+password+"','"+age+"')";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		dbConnectionUtil.queryOperations(insertQuery);
-		// hello world
 	}
 
 }

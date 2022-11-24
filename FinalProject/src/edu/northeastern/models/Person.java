@@ -8,6 +8,14 @@ public class Person {
 	private String password;
 	private int age;
 	
+	Person(String lastName, String firstName, String username, String password,int age){
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.userName=username;
+		this.password=password;
+		this.age=age;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
