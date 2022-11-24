@@ -2,14 +2,19 @@ package edu.northeastern.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import edu.northeastern.dbObject.DBConnectionUtil;
 import edu.northeastern.models.Bus;
+import edu.northeastern.models.BusTicket;
 import edu.northeastern.models.Flight;
+import edu.northeastern.models.FlightTickets;
 import edu.northeastern.models.Location;
 import edu.northeastern.models.Train;
+import edu.northeastern.models.TrainTickets;
 import edu.northeastern.models.TravelBooked;
+import edu.northeastern.models.TravelTickets;
 
 public class TravelDAO {
 	
@@ -57,4 +62,87 @@ public class TravelDAO {
 		}
 		return travel;
 	}
+	
+	public ArrayList<TravelTickets> FindTicket(Location source, Location destination) throws SQLException {
+		String findTicketQuery = "Select * from Tickets where FromLocation='"+source.getLocationName()+"' and ToLocation='"+destination.getLocationName()+"'";
+		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
+		ResultSet result=dbConnectionUtil.selectOperations(findTicketQuery);
+		ArrayList<TravelTickets> ticketsList = new ArrayList<>();
+		while(result.next()) {
+			String flightNo = result.getString("FlightNo");
+			String airline = result.getString("Airline");
+			String busNo = result.getString("BusNo");
+			String trainNo = result.getString("TrainNo");
+			double cost = result.getDouble("TravelCost");
+			String from = result.getString("FromLocation");
+			String to = result.getString("ToLocation");
+			Date departureTime = result.getDate("DepartureTime");
+			Date arrivalTime = result.getDate("ArrivalTime");
+			LocationDAO locationDAO = new LocationDAO();
+			Location fromLocation = locationDAO.getLocation(from);
+			Location toLocation = locationDAO.getLocation(to);
+			TravelTickets travel = new TravelTickets(cost, fromLocation, toLocation, departureTime, arrivalTime);
+			
+			if(flightNo!=null) {
+				FlightTickets flight = (FlightTickets)travel;
+				flight.setCarrier(airline);
+				flight.setFlightNo(flightNo);
+				ticketsList.add(flight);
+			}
+			else if(busNo!=null) {
+				BusTicket bus = (BusTicket)travel;
+				bus.setBusNo(busNo);
+				ticketsList.add(bus);
+			}
+			else if(trainNo!=null) {
+				TrainTickets train = (TrainTickets)travel;
+				train.setTrainNo(trainNo);
+				ticketsList.add(train);
+			}
+			
+		}
+		return ticketsList;
+	}
+	
+	public ArrayList<TravelTickets> FindAllTicket() throws SQLException {
+		String findTicketQuery = "Select * from Tickets";
+		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
+		ResultSet result=dbConnectionUtil.selectOperations(findTicketQuery);
+		ArrayList<TravelTickets> ticketsList = new ArrayList<>();
+		while(result.next()) {
+			String flightNo = result.getString("FlightNo");
+			String airline = result.getString("Airline");
+			String busNo = result.getString("BusNo");
+			String trainNo = result.getString("TrainNo");
+			double cost = result.getDouble("TravelCost");
+			String from = result.getString("FromLocation");
+			String to = result.getString("ToLocation");
+			Date departureTime = result.getDate("DepartureTime");
+			Date arrivalTime = result.getDate("ArrivalTime");
+			LocationDAO locationDAO = new LocationDAO();
+			Location fromLocation = locationDAO.getLocation(from);
+			Location toLocation = locationDAO.getLocation(to);
+			TravelTickets travel = new TravelTickets(cost, fromLocation, toLocation, departureTime, arrivalTime);
+			
+			if(flightNo!=null) {
+				FlightTickets flight = (FlightTickets)travel;
+				flight.setCarrier(airline);
+				flight.setFlightNo(flightNo);
+				ticketsList.add(flight);
+			}
+			else if(busNo!=null) {
+				BusTicket bus = (BusTicket)travel;
+				bus.setBusNo(busNo);
+				ticketsList.add(bus);
+			}
+			else if(trainNo!=null) {
+				TrainTickets train = (TrainTickets)travel;
+				train.setTrainNo(trainNo);
+				ticketsList.add(train);
+			}
+			
+		}
+		return ticketsList;
+	}
+	
 }
