@@ -2,7 +2,9 @@ package application;
 	
 import java.sql.SQLException;
 
-import edu.northeastern.db.DBConnectionUtil;
+import edu.northeastern.dao.CustomerDAO;
+import edu.northeastern.dao.ManagerDAO;
+import edu.northeastern.dbObject.DBConnectionUtil;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -24,7 +26,9 @@ public class Main {
 //	}
 	
 	public static void main(String[] args) throws SQLException {
-		DBConnectionUtil dbConnectionUtil = new DBConnectionUtil();
-		dbConnectionUtil.connector();
+		
+		ManagerDAO managerDAO = new ManagerDAO();
+		managerDAO.insertNewManager("Sharma","Rayna","raynasharma","ray@123",25);
+		
 	}
 }
