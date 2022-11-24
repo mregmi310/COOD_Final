@@ -1,6 +1,13 @@
 package edu.northeastern.models;
 
-public class Train extends Travel{
+import java.util.Date;
+
+public class Train extends TravelBooked{
+
+	public Train(String reservationId, Date reservationTime, double cost, Location fromLocation, Location toLocation,
+			Date departureTime, Date arrivalTime) {
+		super(reservationId, reservationTime, cost, fromLocation, toLocation, departureTime, arrivalTime);
+	}
 
 	private String trainNo;
 
@@ -11,6 +18,5 @@ public class Train extends Travel{
 	public void setTrainNo(String trainNo) {
 		this.trainNo = trainNo;
 	}
-	
-	
+
 }

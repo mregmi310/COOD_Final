@@ -1,10 +1,20 @@
 package edu.northeastern.models;
 
 public class Itinerary {
-
+	private String itineraryID;
 	private Location origin;
 	private Location destination;
-	private double totalCost;
+	public Itinerary(String itineraryID,Location origin, Location destination) {
+		this.itineraryID=itineraryID;
+		this.origin=origin;
+		this.destination=destination;
+	}
+	public String getItineraryID() {
+		return itineraryID;
+	}
+	public void setItineraryID(String itineraryID) {
+		this.itineraryID = itineraryID;
+	}
 	public Location getOrigin() {
 		return origin;
 	}
@@ -17,11 +27,5 @@ public class Itinerary {
 	public void setDestination(Location destination) {
 		this.destination = destination;
 	}
-	public double getTotalCost() {
-		return totalCost;
-	}
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
-	}
-	
+
 }
