@@ -1,7 +1,14 @@
 package edu.northeastern.models;
 
-public class Bus extends Travel{
+import java.util.Date;
+
+public class Bus extends TravelBooked{
 	
+	public Bus(String reservationId, Date reservationTime, double cost, Location fromLocation, Location toLocation,
+			Date departureTime, Date arrivalTime) {
+		super(reservationId, reservationTime, cost, fromLocation, toLocation, departureTime, arrivalTime);
+	}
+
 	private String busNo;
 
 	public String getBusNo() {

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import edu.northeastern.dbObject.DBConnectionUtil;
 import edu.northeastern.models.Customer;
-import edu.northeastern.models.Itinerary;
 
 public class CustomerDAO {
 	
