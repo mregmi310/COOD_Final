@@ -11,5 +11,4 @@ public class ManagerDAO {
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		dbConnectionUtil.queryOperations(insertQuery);
 	}
-
 }

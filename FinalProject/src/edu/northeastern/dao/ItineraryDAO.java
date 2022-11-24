@@ -7,11 +7,9 @@ import edu.northeastern.models.Location;
 
 public class ItineraryDAO {
 	
-	public void insertNewItinerary(Location origin, Location destination,double totalCost) throws SQLException {
+	public void insertNewItinerary(String origin, String destination,double totalCost) throws SQLException {
 		String insertQuery = "Insert into Travel values('"+origin+"','"+destination+"','"+totalCost+"')";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		dbConnectionUtil.queryOperations(insertQuery);
-
-}
-
+	}
 }

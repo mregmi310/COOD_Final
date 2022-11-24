@@ -2,9 +2,11 @@ package edu.northeastern.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import edu.northeastern.dbObject.DBConnectionUtil;
 import edu.northeastern.models.Customer;
+import edu.northeastern.models.Itinerary;
 
 public class CustomerDAO {
 	
@@ -29,6 +31,17 @@ public class CustomerDAO {
 		String updateQuery = "Update Customer set Balance="+customer.getBankBalance()+"where UserName='"+customer.getUserName()+"'";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		dbConnectionUtil.queryOperations(updateQuery);
+	}
+	
+	public ArrayList<String> getTravelHistory(Customer customer) throws SQLException{
+		String travelHistoryQuery = "Select * from CustomerItineraryRel where Customer='"+customer.getUserName()+"'";
+		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
+		ResultSet resultSet = dbConnectionUtil.selectOperations(travelHistoryQuery);
+		ArrayList<String> travelHistory = new ArrayList<>();
+		while(resultSet.next()) {
+			travelHistory.add(resultSet.getString("ItineraryID"));
+		}
+		return travelHistory;
 	}
 }
 
