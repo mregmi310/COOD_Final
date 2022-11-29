@@ -24,6 +24,7 @@ public class TravelDAO {
 		dbConnectionUtil.queryOperations(insertQuery);
 	}
 	
+	
 	public TravelBooked getTravel(String travelID) throws SQLException {
 		String getTravelQuery = "SELECT * from Travel where TravelID='"+travelID+"'";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
@@ -63,7 +64,7 @@ public class TravelDAO {
 		return travel;
 	}
 	
-	public ArrayList<TravelTickets> FindTicket(Location source, Location destination) throws SQLException {
+	public ArrayList<TravelTickets> findTicket(Location source, Location destination) throws SQLException {
 		String findTicketQuery = "Select * from Tickets where FromLocation='"+source.getLocationName()+"' and ToLocation='"+destination.getLocationName()+"'";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		ResultSet result=dbConnectionUtil.selectOperations(findTicketQuery);
@@ -104,7 +105,7 @@ public class TravelDAO {
 		return ticketsList;
 	}
 	
-	public ArrayList<TravelTickets> FindAllTicket() throws SQLException {
+	public ArrayList<TravelTickets> findAllTicket() throws SQLException {
 		String findTicketQuery = "Select * from Tickets";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		ResultSet result=dbConnectionUtil.selectOperations(findTicketQuery);
@@ -125,7 +126,7 @@ public class TravelDAO {
 			TravelTickets travel = new TravelTickets(cost, fromLocation, toLocation, departureTime, arrivalTime);
 			
 			if(flightNo!=null) {
-				FlightTickets flight = (FlightTickets)travel;
+				FlightTickets flight = new FlightTickets(cost, fromLocation, toLocation, departureTime, arrivalTime);
 				flight.setCarrier(airline);
 				flight.setFlightNo(flightNo);
 				ticketsList.add(flight);

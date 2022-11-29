@@ -13,7 +13,6 @@ public class DBConnectionUtil {
 		Statement stmt = conn.createStatement();
 		stmt.execute(query);
 		conn.close();
-		System.out.println("Done");
 	}
 	
 	public ResultSet selectOperations(String query) throws SQLException{

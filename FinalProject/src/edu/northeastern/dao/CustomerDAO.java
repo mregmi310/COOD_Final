@@ -19,7 +19,8 @@ public class CustomerDAO {
 		String fetchQuery = "Select * from customer where username='"+username+"'";
 		DBConnectionUtil dbConnectionUtil =  new DBConnectionUtil();
 		ResultSet resultSet = dbConnectionUtil.selectOperations(fetchQuery);
-		if(password.equals(resultSet.getString("password"))) {
+		resultSet.next();
+		if(!password.equals(resultSet.getString("Password"))) {
 			throw new Exception("Password Mismatch!");
 		}
 		Customer customer = new Customer(resultSet.getString("LastName"),resultSet.getString("FirstName"),resultSet.getString("UserName"),resultSet.getString("Password"),resultSet.getDouble("Balance"),resultSet.getInt("age"));

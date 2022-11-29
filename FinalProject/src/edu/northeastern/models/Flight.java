@@ -9,7 +9,7 @@ public class Flight extends TravelBooked {
 		super(reservationId, reservationTime, cost, fromLocation, toLocation, departureTime, arrivalTime);
 	}
 	private String flightNo;
-	  private String airline;
+	private String airline;
 	public String getFlightNo() {
 		return flightNo;
 	}
